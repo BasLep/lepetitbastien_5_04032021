@@ -125,9 +125,9 @@ let dataTeddy = {
 	products: ["5be9c8541c9d440000665243"]
 };
 console.log(dataTeddy);
-//   http://localhost:3000/api/teddies/order
+//http://jsonplaceholder.typicode.com/posts
 const insertOrder = async function (data) {
-	let response = await fetch("http://jsonplaceholder.typicode.com/posts", {
+	let response = await fetch("http://localhost:3000/api/teddies/order", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(data)
