@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" href="../main.css" />
+		<title>Mon panier</title>
+	</head>
+	<body>
+		<header id="header_index">
+			<a class="navbar-brand" href="index.html">
+				<img id=header_logo
+					src="https://user.oc-static.com/upload/2019/09/04/15675819263013_image1.png" alt="site_logo"
+				></img>
+			</a>
+				
+				<nav class="navbar navbar-expand">
+					<ul class="navbar-nav">
+						<li class="nav-item active"><a href="index.html">Index</a></li>
+						<li class="nav-item"><a href="basket.html">Mon panier</a></li>
+					</ul>
+				</nav>
+		</header>
+		<section id="basket_list">
+			<h1>Mon panier</h1>
+		<div id="product_basket">
+			<table id="table_display_product">
+				<thead>
+					<tr id="title_category">
+						<th>Image</th>
+						<th>Nom</th>
+						<th>Couleur</th>
+						<th>Prix</th>
+						<th>Quantité</th>
+						<th>Ajouter</th>
+						<th>Retirer</th>
+						<th>Supprimer</th>
+						<th>Total ourson</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th id="title_total_price">Prix total</th>
+						<th id="total_price"></th>
+					</tr>
+				</tfoot>
+				<tbody id="table_body"></tbody>
+			</table>
+		</div>
+		</section>
+		<section id="section_order">
+			<button id="button_place_order">Passer commande</button>
+			<div id="div_place_order">
+				<h2 id="title_form">Formulaire pour passer votre commande</h2>
+				<form id="form_place_order">
+					<div class="form-group">
+						<label for="firstName">Votre prénom</label><input type="text" name="firstName" class="form-control" id="first_name">
+					</div>
+					<div class="form-group">
+						<label for="lastName">Votre nom</label><input type="text" name="lastName" class="form-control" id="last_name">
+					</div>
+					<div class="form-group">
+						<label for="adress">Votre adresse</label><textarea name="adress" class="form-control" id="adress"></textarea>
+					</div>
+					<div class="form-groupe">
+						<label for="email">Votre email</label><input type="email" name="email" class="form-control" id="email">
+					</div>
+					<div class="form-group">
+						<label for="city">Votre ville</label><input type="text" name="city" class="form-control" id="city_form">
+					</div>
+					<button type="submit" id="button_submit">Commander</button>
+				</form>
+			</div>
+		</section>
+		<script src="basket.js"></script>
+	</body>
+</html>
