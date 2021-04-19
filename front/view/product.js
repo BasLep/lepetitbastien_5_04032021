@@ -30,7 +30,8 @@ async function getInformationTeddy() {
 		url: teddies.imageUrl,
 		price: teddies.price / 100,
 		color: colorOfTeddy,
-		quantity: quantityOfTeddy
+		quantity: quantityOfTeddy,
+		description: teddies.description
 	};
 
 	boxTeddyProduct.appendChild(nameTeddy);

@@ -71,3 +71,7 @@ tfoot {
 	margin-top: 30px;
 	margin-bottom: 50px;
 }
+#succes_order {
+	display: flex;
+	align-items: center;
+}

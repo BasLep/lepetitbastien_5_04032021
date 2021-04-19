@@ -3,11 +3,6 @@ function displayBasket() {
 	let card = JSON.parse(localStorage.getItem("card"));
 	let tableBody = document.getElementById("table_body");
 	card.forEach((teddy) => {
-		// recuperation of the teddy id
-		products = {
-			id: teddy.id
-		};
-		console.log(products);
 		// new line
 		let newLine = tableBody.insertRow(0);
 		// new line for image
@@ -93,69 +88,67 @@ totalPrice();
 
 function displayPlaceAnOrder() {
 	let buttonPlaceOrder = document.getElementById("button_place_order");
-	let formPlaceOrder = document.getElementById("div_place_order");
+	let displayPlaceOrder = document.getElementById("div_place_order");
 	buttonPlaceOrder.addEventListener("click", () => {
-		if (getComputedStyle(formPlaceOrder).display != "none") {
-			formPlaceOrder.style.display = "none";
+		if (getComputedStyle(displayPlaceOrder).display != "none") {
+			displayPlaceOrder.style.display = "none";
 		} else {
-			formPlaceOrder.style.display = "block";
+			displayPlaceOrder.style.display = "block";
 		}
 	});
 }
 displayPlaceAnOrder();
 
-// let contact = {};
-// document.getElementById("button_submit").addEventListener("click", () => {
-// 	contact = {
-// 		firstName: document.getElementById("first_name"),
-// 		lastName: document.getElementById("last_name"),
-// 		adress: document.getElementById("adress"),
-// 		email: document.getElementById("email"),
-// 		city: document.getElementById("city_form")
-// 	};
-// });
-let dataTeddy = {
-	contact: {
-		firstName: "Bastien",
-		lastName: "Lepetit",
-		adress: "rue Georges",
-		email: "aaa@aaa.fr",
-		city: "New-York"
-	},
-	products: ["5be9c8541c9d440000665243"]
-};
-console.log(dataTeddy);
-//http://jsonplaceholder.typicode.com/posts
-const insertOrder = async function (data) {
-	let response = await fetch("http://localhost:3000/api/teddies/order", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(data)
+function orderInformation() {
+	document.getElementById("form_place_order").addEventListener("submit", (e) => {
+		e.preventDefault();
+		// get form values
+		let firstName = document.getElementById("first_name").value;
+		let lastName = document.getElementById("last_name").value;
+		let address = document.getElementById("address").value;
+		let email = document.getElementById("email").value;
+		let city = document.getElementById("city_form").value;
+		let contact = {
+			firstName: firstName,
+			lastName: lastName,
+			address: address,
+			email: email,
+			city: city
+		};
+		let card = JSON.parse(localStorage.getItem("card"));
+		let products = [];
+		card.forEach((teddy) => {
+			while (teddy.quantity != 0) {
+				products.push(teddy.id);
+				teddy.quantity--;
+			}
+
+			console.log(products);
+		});
+		let fullInformation = { contact, products };
+		let order = JSON.parse(localStorage.getItem("order")) || [];
+		const insertOrder = async function (data) {
+			try {
+				let response = await fetch("http://localhost:3000/api/teddies/order", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(data)
+				});
+				if (response.ok) {
+					let data = await response.json();
+					console.log(data);
+					order.push(data);
+					localStorage.setItem("order", JSON.stringify(order));
+					console.log(order);
+					window.location.href = "confirmation.html";
+				} else {
+					console.error("retour du serveur : ", response.status);
+				}
+			} catch (e) {
+				console.log(e);
+			}
+		};
+		insertOrder(fullInformation);
 	});
-	// let responseData = await response.json();
-};
-insertOrder(dataTeddy);
-// document.getElementById("button_submit").addEventListener("click", () => {
-// 	let contact = {
-// 		firstName: document.getElementById("first_name"),
-// 		lastName: document.getElementById("last_name"),
-// 		adress: document.getElementById("adress"),
-// 		email: document.getElementById("email"),
-// 		city: document.getElementById("city_form")
-// 	};
-// 	console.log(contact);
-// 	// const promiseOrder = await fetch("http://localhost:3000/api/teddies/order", {
-// 	// 	method: "POST",
-// 	// 	headers: { "Content-Type": "application/json" },
-// 	// 	body: JSON.stringify(contact)
-// 	// });
-// 	// promiseOrder
-// 	// 	.then((response) => response.json())
-// 	// 	.then((response) => {
-// 	// 		try {
-// 	// 		} catch (error) {
-// 	// 			console.log(error);
-// 	// 		}
-// 	// 	});
-// 	// // const order = await result.json();
-// });
+}
+orderInformation();

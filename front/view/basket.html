@@ -63,19 +63,19 @@
 				<h2 id="title_form">Formulaire pour passer votre commande</h2>
 				<form id="form_place_order">
 					<div class="form-group">
-						<label for="firstName">Votre prénom</label><input type="text" name="firstName" class="form-control" id="first_name">
+						<label for="firstname">Votre prénom</label><input type="text" name="firstname" class="form-control" id="first_name" required pattern="[[A-Za-zéèêîçë-]+" maxlength="128">
 					</div>
 					<div class="form-group">
-						<label for="lastName">Votre nom</label><input type="text" name="lastName" class="form-control" id="last_name">
+						<label for="lastname">Votre nom</label><input type="text" name="lastname" class="form-control" id="last_name" required pattern="[A-Za-zéèêîçë -]+" maxlength="128">
 					</div>
 					<div class="form-group">
-						<label for="adress">Votre adresse</label><textarea name="adress" class="form-control" id="adress"></textarea>
+						<label for="address">Votre adresse</label><textarea name="address" class="form-control" id="address" required maxlength="256"></textarea>
 					</div>
 					<div class="form-groupe">
-						<label for="email">Votre email</label><input type="email" name="email" class="form-control" id="email">
+						<label for="email">Votre email</label><input type="email" name="email" class="form-control" id="email" required>
 					</div>
 					<div class="form-group">
-						<label for="city">Votre ville</label><input type="text" name="city" class="form-control" id="city_form">
+						<label for="city">Votre ville</label><input type="text" name="city" class="form-control" id="city_form" required pattern="[A-Za-zéèêîçë -]+" maxlength="128">
 					</div>
 					<button type="submit" id="button_submit">Commander</button>
 				</form>
