@@ -72,6 +72,12 @@ tfoot {
 	margin-bottom: 50px;
 }
 #succes_order {
-	display: flex;
-	align-items: center;
+	margin: 25px;
+	text-align: center;
+}
+.add_teddy_basket {
+	cursor: pointer;
+}
+#menu_index {
+	padding-right: 10px;
 }
