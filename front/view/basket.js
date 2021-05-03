@@ -8,6 +8,7 @@ function displayBasket() {
 		// new line for image
 		let newCellImage = newLine.insertCell(-1);
 		const image = document.createElement("img");
+		newCellImage.classList.add("img_basket");
 		image.src = teddy.url;
 		newCellImage.appendChild(image);
 		// new cell for teddy name
@@ -28,7 +29,7 @@ function displayBasket() {
 		newCellQuantity.appendChild(quantity);
 		// new cell for add teddy
 		let newCellAdd = newLine.insertCell(-1);
-		newCellAdd.classList.add("add_teddy_basket");
+		newCellAdd.classList.add("modification_quantity_basket");
 		let add = document.createTextNode("+");
 		newCellAdd.appendChild(add);
 		newCellAdd.addEventListener("click", () => {
@@ -38,7 +39,7 @@ function displayBasket() {
 		});
 		// new cell for remove one teddy in quantity
 		let newCellRemove = newLine.insertCell(-1);
-		newCellRemove.classList.add("add_teddy_basket");
+		newCellRemove.classList.add("modification_quantity_basket");
 		let remove = document.createTextNode("-");
 		newCellRemove.appendChild(remove);
 		newCellRemove.addEventListener("click", () => {
@@ -52,7 +53,7 @@ function displayBasket() {
 		});
 		// new cell for delete teddy
 		let newCellDelete = newLine.insertCell(-1);
-		newCellDelete.classList.add("add_teddy_basket");
+		newCellDelete.classList.add("modification_quantity_basket");
 		let deleteTeddy = document.createTextNode("Supprimer");
 		newCellDelete.appendChild(deleteTeddy);
 		newCellDelete.addEventListener("click", () => {
@@ -138,10 +139,8 @@ function orderInformation() {
 				});
 				if (response.ok) {
 					let data = await response.json();
-					console.log(data);
 					order.push(data);
 					localStorage.setItem("order", JSON.stringify(order));
-					console.log(order);
 					window.location.href = "confirmation.html";
 				} else {
 					console.error("retour du serveur : ", response.status);
