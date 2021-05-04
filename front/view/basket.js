@@ -108,18 +108,33 @@ function orderInformation() {
 	document.getElementById("form_place_order").addEventListener("submit", (e) => {
 		e.preventDefault();
 		// get form values
+		const regex1 = /^[A-Z][A-Za-z\é\è\ê\ \-]+$/; // first name, last name and city
+		const regex2 = /^[0-9]{1,3}[A-Za-z\é\è\ê\ \-]+$/; // adresss
+		const regex3 = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/; // email
 		let firstName = document.getElementById("first_name").value;
 		let lastName = document.getElementById("last_name").value;
 		let address = document.getElementById("address").value;
 		let email = document.getElementById("email").value;
 		let city = document.getElementById("city_form").value;
-		let contact = {
-			firstName: firstName,
-			lastName: lastName,
-			address: address,
-			email: email,
-			city: city
-		};
+		let contact = {};
+		if (
+			firstName.match(regex1) !== null &&
+			lastName.match(regex1) !== null &&
+			address.match(regex2) !== null &&
+			email.match(regex3) !== null &&
+			city.match(regex1) !== null
+		) {
+			contact = {
+				firstName: firstName,
+				lastName: lastName,
+				address: address,
+				email: email,
+				city: city
+			};
+		} else {
+			alert("Il y a une erreur dans la saisie d'une de vos information");
+		}
+
 		let card = JSON.parse(localStorage.getItem("card"));
 		let products = [];
 		card.forEach((teddy) => {
@@ -140,6 +155,8 @@ function orderInformation() {
 				if (response.ok) {
 					let data = await response.json();
 					order.push(data);
+					// clear card after order
+					localStorage.clear("card");
 					localStorage.setItem("order", JSON.stringify(order));
 					window.location.href = "confirmation.html";
 				} else {
